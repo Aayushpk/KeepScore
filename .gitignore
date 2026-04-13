@@ -1,0 +1,30 @@
+# node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# expo
+.expo/
+dist/
+web-build/
+.expo-shared/
+
+# native
+ios/
+android/
+*.jks
+*.p12
+*.key
+*.mobileprovision
+
+# macOS
+.DS_Store
+
+# local env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# typescript
+tsconfig.tsbuildinfo
