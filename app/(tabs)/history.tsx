@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Modal, ScrollView, Alert } from 'react-native';
-import { useMatchHistory, MatchResult, InningsData } from './context/MatchHistoryContext';
+import { useMatchHistory, MatchResult, InningsData } from '../context/MatchHistoryContext';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function History() {

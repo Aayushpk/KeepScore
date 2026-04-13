@@ -9,8 +9,8 @@ import {
   TextInput,
   Alert
 } from 'react-native';
-import { useTeams, Team } from './context/TeamsContext';
-import { theme } from './theme';
+import { useTeams, Team } from '../context/TeamsContext';
+import { theme } from '../theme';
 
 export default function TeamsScreen() {
   const { teams, addTeam, deleteTeam, updateTeam } = useTeams();

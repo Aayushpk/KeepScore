@@ -10,9 +10,9 @@ import {
   FlatList
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useTeams } from './context/TeamsContext';
-import { useMatchHistory } from './context/MatchHistoryContext';
-import { theme } from './theme';
+import { useTeams } from '../context/TeamsContext';
+import { useMatchHistory } from '../context/MatchHistoryContext';
+import { theme } from '../theme';
 
 export default function Dashboard() {
   const router = useRouter();
