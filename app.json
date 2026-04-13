@@ -5,9 +5,7 @@
     "version": "1.0.0",
     "scheme": "cricketscorer",
     "userInterfaceStyle": "dark",
-    "icon": "./assets/icon.png",
     "web": {
-      "favicon": "./assets/favicon.png",
       "output": "static",
       "bundler": "metro"
     }
