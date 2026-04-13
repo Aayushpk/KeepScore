@@ -460,21 +460,21 @@ export default function ScoringScreen() {
           <TouchableOpacity style={styles.batterRow} onPress={() => setPickerModalMode('striker')}>
             <Text style={styles.playerRole}>Striker 🏏</Text>
             <Text style={styles.playerName}>{striker || 'Tap to select...'}</Text>
-            {striker && batsmanStats[striker] && (
+            {!!striker && batsmanStats[striker] && (
               <Text style={styles.playerStats}>{batsmanStats[striker].runs} ({batsmanStats[striker].balls})</Text>
             )}
           </TouchableOpacity>
           <TouchableOpacity style={styles.batterRow} onPress={() => setPickerModalMode('nonStriker')}>
             <Text style={styles.playerRole}>Non-Striker</Text>
             <Text style={styles.playerName}>{nonStriker || 'Tap to select...'}</Text>
-            {nonStriker && batsmanStats[nonStriker] && (
+            {!!nonStriker && batsmanStats[nonStriker] && (
               <Text style={styles.playerStats}>{batsmanStats[nonStriker].runs} ({batsmanStats[nonStriker].balls})</Text>
             )}
           </TouchableOpacity>
           <TouchableOpacity style={styles.bowlerRow} onPress={() => setPickerModalMode('bowler')}>
             <Text style={styles.playerRole}>Bowler 🔴</Text>
             <Text style={styles.playerName}>{bowler || 'Tap to select...'}</Text>
-            {bowler && bowlerStats[bowler] && (
+            {!!bowler && bowlerStats[bowler] && (
               <Text style={styles.playerStats}>
                 O: {Math.floor(bowlerStats[bowler].balls/6)}.{bowlerStats[bowler].balls%6} | R: {bowlerStats[bowler].runs} | W: {bowlerStats[bowler].wickets}
               </Text>
@@ -699,7 +699,7 @@ const styles = StyleSheet.create({
   ballText: { color: '#fff', fontWeight: 'bold', fontSize: 18 },
   ballTextWicket: { color: '#f44336' },
   ballTextBoundary: { color: '#2196f3' },
-  controlPad: { flex: 1, backgroundColor: '#1a1a1a', borderTopLeftRadius: 30, borderTopRightRadius: 30, padding: 20, paddingTop: 25, marginTop: 'auto' },
+  controlPad: { backgroundColor: '#1a1a1a', borderTopLeftRadius: 30, borderTopRightRadius: 30, padding: 20, paddingTop: 25 },
   runsGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between', gap: 15 },
   runBtn: { width: '30%', backgroundColor: '#2a2a2a', paddingVertical: 18, borderRadius: 12, alignItems: 'center', borderWidth: 1, borderColor: '#444' },
   runBtnText: { color: '#fff', fontSize: 24, fontWeight: 'bold' },
