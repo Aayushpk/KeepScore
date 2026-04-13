@@ -439,81 +439,83 @@ export default function ScoringScreen() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: '100%'}}>
-           <Text style={styles.teamTitle}>{currentBattingTeamName} vs {currentBowlingTeamName}</Text>
-           <TouchableOpacity style={styles.historyBtn} onPress={() => setIsHistoryVisible(true)}>
-             <Ionicons name="time-outline" size={26} color="#4caf50" />
-           </TouchableOpacity>
-        </View>
-        <Text style={styles.targetInfo}>{innings === 1 ? result : `Target: ${targetScore}`}</Text>
-      </View>
-
-      <View style={styles.scoreboardArea}>
-        <Text style={styles.mainScore}>{totalRuns}/{wickets}</Text>
-        <Text style={styles.overCount}>Overs: {oversBowled}.{ballsInOver} / {totalOvers}</Text>
-        <Text style={styles.currRR}>CRR: {balls > 0 ? ((totalRuns / (balls / 6))).toFixed(2) : '0.00'}</Text>
-      </View>
-
-      <View style={styles.playersArea}>
-        <TouchableOpacity style={styles.batterRow} onPress={() => setPickerModalMode('striker')}>
-          <Text style={styles.playerRole}>Striker 🏏</Text>
-          <Text style={styles.playerName}>{striker || 'Tap to select...'}</Text>
-          {striker && batsmanStats[striker] && (
-            <Text style={styles.playerStats}>{batsmanStats[striker].runs} ({batsmanStats[striker].balls})</Text>
-          )}
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.batterRow} onPress={() => setPickerModalMode('nonStriker')}>
-          <Text style={styles.playerRole}>Non-Striker</Text>
-          <Text style={styles.playerName}>{nonStriker || 'Tap to select...'}</Text>
-          {nonStriker && batsmanStats[nonStriker] && (
-            <Text style={styles.playerStats}>{batsmanStats[nonStriker].runs} ({batsmanStats[nonStriker].balls})</Text>
-          )}
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.bowlerRow} onPress={() => setPickerModalMode('bowler')}>
-          <Text style={styles.playerRole}>Bowler 🔴</Text>
-          <Text style={styles.playerName}>{bowler || 'Tap to select...'}</Text>
-          {bowler && bowlerStats[bowler] && (
-            <Text style={styles.playerStats}>
-              O: {Math.floor(bowlerStats[bowler].balls/6)}.{bowlerStats[bowler].balls%6} | R: {bowlerStats[bowler].runs} | W: {bowlerStats[bowler].wickets}
-            </Text>
-          )}
-        </TouchableOpacity>
-      </View>
-
-      {renderOverTimeline()}
-
-      {/* Control Pad */}
-      <View style={styles.controlPad}>
-        <View style={styles.runsGrid}>
-           {[0,1,2,3,4,6].map(r => (
-             <TouchableOpacity key={r} style={[styles.runBtn, r===4||r===6 ? styles.boundaryBtn : null]} onPress={() => handleRun(r)}>
-               <Text style={[styles.runBtnText, r===4||r===6 ? styles.boundaryText : null]}>{r}</Text>
+      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+        <View style={styles.header}>
+          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', width: '100%'}}>
+             <Text style={styles.teamTitle}>{currentBattingTeamName} vs {currentBowlingTeamName}</Text>
+             <TouchableOpacity style={styles.historyBtn} onPress={() => setIsHistoryVisible(true)}>
+               <Ionicons name="time-outline" size={26} color="#4caf50" />
              </TouchableOpacity>
-           ))}
+          </View>
+          <Text style={styles.targetInfo}>{innings === 1 ? result : `Target: ${targetScore}`}</Text>
         </View>
-        
-        <View style={styles.extrasRow}>
-          <TouchableOpacity style={styles.extraBtn} onPress={() => handleExtra('Wd', 1, false)}>
-            <Text style={styles.extraText}>Wide</Text>
+
+        <View style={styles.scoreboardArea}>
+          <Text style={styles.mainScore}>{totalRuns}/{wickets}</Text>
+          <Text style={styles.overCount}>Overs: {oversBowled}.{ballsInOver} / {totalOvers}</Text>
+          <Text style={styles.currRR}>CRR: {balls > 0 ? ((totalRuns / (balls / 6))).toFixed(2) : '0.00'}</Text>
+        </View>
+
+        <View style={styles.playersArea}>
+          <TouchableOpacity style={styles.batterRow} onPress={() => setPickerModalMode('striker')}>
+            <Text style={styles.playerRole}>Striker 🏏</Text>
+            <Text style={styles.playerName}>{striker || 'Tap to select...'}</Text>
+            {striker && batsmanStats[striker] && (
+              <Text style={styles.playerStats}>{batsmanStats[striker].runs} ({batsmanStats[striker].balls})</Text>
+            )}
           </TouchableOpacity>
-          <TouchableOpacity style={styles.extraBtn} onPress={() => handleExtra('Nb', 1, false)}>
-            <Text style={styles.extraText}>No Ball</Text>
+          <TouchableOpacity style={styles.batterRow} onPress={() => setPickerModalMode('nonStriker')}>
+            <Text style={styles.playerRole}>Non-Striker</Text>
+            <Text style={styles.playerName}>{nonStriker || 'Tap to select...'}</Text>
+            {nonStriker && batsmanStats[nonStriker] && (
+              <Text style={styles.playerStats}>{batsmanStats[nonStriker].runs} ({batsmanStats[nonStriker].balls})</Text>
+            )}
           </TouchableOpacity>
-          <TouchableOpacity style={styles.extraBtn} onPress={() => handleExtra('Lb', 1, true)}>
-            <Text style={styles.extraText}>Leg Bye</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.extraBtn} onPress={() => handleExtra('B', 1, true)}>
-            <Text style={styles.extraText}>Bye</Text>
+          <TouchableOpacity style={styles.bowlerRow} onPress={() => setPickerModalMode('bowler')}>
+            <Text style={styles.playerRole}>Bowler 🔴</Text>
+            <Text style={styles.playerName}>{bowler || 'Tap to select...'}</Text>
+            {bowler && bowlerStats[bowler] && (
+              <Text style={styles.playerStats}>
+                O: {Math.floor(bowlerStats[bowler].balls/6)}.{bowlerStats[bowler].balls%6} | R: {bowlerStats[bowler].runs} | W: {bowlerStats[bowler].wickets}
+              </Text>
+            )}
           </TouchableOpacity>
         </View>
-        
-        <View style={styles.actionsRow}>
-          <TouchableOpacity style={styles.wicketBtn} onPress={handleWicket}>
-            <Text style={styles.wicketText}>WICKET</Text>
-          </TouchableOpacity>
+
+        {renderOverTimeline()}
+
+        {/* Control Pad */}
+        <View style={styles.controlPad}>
+          <View style={styles.runsGrid}>
+             {[0,1,2,3,4,6].map(r => (
+               <TouchableOpacity key={r} style={[styles.runBtn, r===4||r===6 ? styles.boundaryBtn : null]} onPress={() => handleRun(r)}>
+                 <Text style={[styles.runBtnText, r===4||r===6 ? styles.boundaryText : null]}>{r}</Text>
+               </TouchableOpacity>
+             ))}
+          </View>
+          
+          <View style={styles.extrasRow}>
+            <TouchableOpacity style={styles.extraBtn} onPress={() => handleExtra('Wd', 1, false)}>
+              <Text style={styles.extraText}>Wide</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.extraBtn} onPress={() => handleExtra('Nb', 1, false)}>
+              <Text style={styles.extraText}>No Ball</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.extraBtn} onPress={() => handleExtra('Lb', 1, true)}>
+              <Text style={styles.extraText}>Leg Bye</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.extraBtn} onPress={() => handleExtra('B', 1, true)}>
+              <Text style={styles.extraText}>Bye</Text>
+            </TouchableOpacity>
+          </View>
+          
+          <View style={styles.actionsRow}>
+            <TouchableOpacity style={styles.wicketBtn} onPress={handleWicket}>
+              <Text style={styles.wicketText}>WICKET</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      </ScrollView>
 
       {/* Player Picker Modal */}
       <Modal visible={!!pickerModalMode} animationType="fade" transparent={true}>
@@ -672,6 +674,7 @@ export default function ScoringScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#121212' },
+  scrollContent: { paddingBottom: 50 },
   header: { backgroundColor: '#1a1a1a', padding: 20, borderBottomWidth: 1, borderBottomColor: '#333', alignItems: 'center' },
   teamTitle: { color: '#fff', fontSize: 20, fontWeight: 'bold' },
   historyBtn: { position: 'absolute', right: 0, padding: 5 },
