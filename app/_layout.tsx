@@ -65,6 +65,7 @@ export default function Layout() {
           options={{
             title: 'Toss',
             href: null,
+            tabBarButton: () => null,
           }}
         />
         <Tabs.Screen
@@ -72,6 +73,7 @@ export default function Layout() {
           options={{
             title: 'Scoring',
             href: null,
+            tabBarButton: () => null,
           }}
         />
       </Tabs>
