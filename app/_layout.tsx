@@ -64,7 +64,6 @@ export default function Layout() {
           name="toss"
           options={{
             title: 'Toss',
-            href: null,
             tabBarButton: () => null,
           }}
         />
@@ -72,7 +71,6 @@ export default function Layout() {
           name="scoring"
           options={{
             title: 'Scoring',
-            href: null,
             tabBarButton: () => null,
           }}
         />
